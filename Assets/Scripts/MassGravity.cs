@@ -6,7 +6,6 @@ using UnityEngine;
 public class MassGravity : MonoBehaviour
 {
     public Planet planet;
-
     private void Awake()
     {
         TurnOffPhysics();

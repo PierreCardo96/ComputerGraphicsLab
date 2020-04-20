@@ -5,8 +5,7 @@ using UnityEngine;
 
 public class Planet : MonoBehaviour
 {
-    [SerializeField]
-    Galaxy galaxy;
+    private Galaxy galaxy;
 
     [SerializeField]
     float gravity = -10f;
@@ -14,12 +13,16 @@ public class Planet : MonoBehaviour
     [SerializeField]
     bool FixedDirection;
 
+    public void Start()
+    {
+        galaxy = GetComponentInParent<Galaxy>();
+    }
+
     public void Attract(Transform mass)
     {
 
         Vector3 massCurrentDirection = mass.up;
         Vector3 targetDirection = GetTargetDirection(mass);
-
         mass.rotation = Quaternion.FromToRotation(massCurrentDirection, targetDirection) * mass.rotation;//Adding the addition rotation to the current rotation
         mass.GetComponent<Rigidbody>().AddForce(targetDirection * gravity);//attract the mass to the planet
     }
@@ -36,9 +39,9 @@ public class Planet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        print("Triggered by " + other.gameObject.name);
         if (other.GetComponent<MassGravity>())
         {
+            print("Triggered by " + other.gameObject.name);
             galaxy.SetPlanetToMass(other.GetComponent<MassGravity>(), this);
         }
     }

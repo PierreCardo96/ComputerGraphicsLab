@@ -3,65 +3,39 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-[RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField]
-    float moveSpeed = 6f;
+    float speed = 2;
 
-    [SerializeField]
-    float smoothTime = 0.15f;
-
-    [SerializeField]
-    float rotationSpeed = 80f;
-
-    private Rigidbody rigidbody;
     private PlayerAnimator playerAnimator;
 
-    private void Start()
+    // Start is called before the first frame update
+    void Start()
     {
-        rigidbody = GetComponent<Rigidbody>();
         playerAnimator = GetComponentInChildren<PlayerAnimator>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ProcessTranslation()
     {
-        RespondToTranslateInput();
-        RespondToRotateInput();
+        float verticalTranslation = Input.GetAxis("Vertical") * speed * Time.deltaTime;
+        float horizontalTranslation = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
+        transform.Translate(horizontalTranslation, 0, verticalTranslation);
+
+        UpdateAnimation(verticalTranslation, horizontalTranslation);
     }
 
-    private void RespondToRotateInput()
+    private void UpdateAnimation(float verticalTranslation, float horizontalTranslation)
     {
-        rigidbody.angularVelocity = Vector3.zero;
-        float rotationThisFrame = rotationSpeed * Time.deltaTime;
-        if (Input.GetKey(KeyCode.A))
+        if (verticalTranslation > 0)
         {
-            transform.Rotate(-Vector3.up * rotationThisFrame);
+            playerAnimator?.UpdatePlayerState(PlayerState.RunningForward);
         }
-        else if (Input.GetKey(KeyCode.D))
+        else if(verticalTranslation < 0)
         {
-            transform.Rotate(Vector3.up * rotationThisFrame);
-        }
-    }
-
-    private void RespondToTranslateInput()
-    {
-        if (Input.GetKey(KeyCode.W))
-        {
-            float speed = moveSpeed;
-            if (Input.GetKey(KeyCode.LeftShift))
-            {
-                speed = moveSpeed * 1.3f;
-                playerAnimator?.UpdatePlayerState(PlayerState.Running);
-            }
-            else
-            {
-                playerAnimator?.UpdatePlayerState(PlayerState.Walking);
-            }
-
-            transform.position += transform.TransformDirection(Vector3.forward) * Time.deltaTime * speed;
+            playerAnimator?.UpdatePlayerState(PlayerState.RunningBackward);
         }
         else
         {

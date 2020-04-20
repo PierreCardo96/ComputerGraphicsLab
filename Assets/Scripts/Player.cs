@@ -1,29 +1,36 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
     [SerializeField]
-    float rotationSensitivity = 100f;
+    PlayerHealth playerHealth;
+    private PlayerMovement playerMovement;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        playerMovement = GetComponent<PlayerMovement>();
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
     void Update()
     {
-        //float rotationThisFrame = rotationSensitivity * Time.deltaTime;
-        //
-        //if (Input.GetKey(KeyCode.A))
-        //{
-        //    transform.Rotate(Vector3.up * rotationThisFrame);
-        //}
-        //else if (Input.GetKey(KeyCode.D))
-        //{
-        //    transform.Rotate(-Vector3.up * rotationThisFrame);
-        //}
+        if (playerHealth.GetHealth() > 0)
+        {
+            playerMovement.ProcessTranslation();
+        }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
+    }
+
+   public float GetHealth()
+    {
+        return playerHealth.GetHealth();
     }
 }

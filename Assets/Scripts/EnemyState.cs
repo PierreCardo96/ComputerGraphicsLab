@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace Assets.Scripts
 {
-    public enum PlayerState
+    public enum EnemyState
     {
-        Idle,
-        RunningForward,
-        RunningBackward,
-        Sprinting
+        Patroling,
+        Chasing,
+        Attacking
     }
 }
