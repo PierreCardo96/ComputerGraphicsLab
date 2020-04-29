@@ -12,6 +12,9 @@ public class EnemyPatroling : MonoBehaviour
     [SerializeField]
     int patrolingRadius = 5;
 
+    [SerializeField]
+    float terrainOffset = 10f;
+
     private List<Vector3> waypoints = new List<Vector3>();
     private int currentWaypoint = 0;
 
@@ -21,20 +24,15 @@ public class EnemyPatroling : MonoBehaviour
         InitializePatrolingRoute();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-
     private void InitializePatrolingRoute()
     {
         int i = numberOfWaypoints;
         while (i > 0)
         {
-            Vector3 waypoint = new Vector3(UnityEngine.Random.Range(-patrolingRadius, patrolingRadius),
-                                    0, UnityEngine.Random.Range(-patrolingRadius, patrolingRadius));
+            float randX = UnityEngine.Random.Range(-patrolingRadius, patrolingRadius);
+            float randZ = UnityEngine.Random.Range(-patrolingRadius, patrolingRadius);
+            float yVal = Terrain.activeTerrain.SampleHeight(new Vector3(randX, 0, randZ));
+            Vector3 waypoint = new Vector3(randX, yVal - terrainOffset, randZ);
             waypoints.Add(waypoint + transform.position);
             i--;
         }
@@ -45,7 +43,7 @@ public class EnemyPatroling : MonoBehaviour
         if(waypoints.Count == 0)
         {
             return;
-        }        
+        }
 
         if (Vector3.Distance(waypoints[currentWaypoint], transform.position) < accuracyWaypoint)
         {

@@ -17,13 +17,14 @@ public class MouseMovement : MonoBehaviour
 
     Vector2 mouseLook;
     Vector2 smoothVector;
+
+    [SerializeField]
     GameObject character;
 
     // Start is called before the first frame update
     void Start()
     {
         mouseLook = new Vector2(0, -transform.eulerAngles.x);
-        character = transform.parent.gameObject;
     }
 
     public void RespondToMouseMovement()

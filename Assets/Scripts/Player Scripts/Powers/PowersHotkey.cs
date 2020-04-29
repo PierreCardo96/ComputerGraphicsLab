@@ -32,6 +32,15 @@ public class PowersHotkey : MonoBehaviour
         {
             ProcessPowerPressed(PowerType.LightningBall);
         }
+
+        if(Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            actionBar.SetAllPowersActivation(true);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha9))
+        {
+            actionBar.SetAllPowersActivation(false);
+        }
     }
 
     private void ProcessPowerPressed(PowerType powerType)

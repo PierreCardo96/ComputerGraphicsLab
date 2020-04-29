@@ -4713,7 +4713,7 @@ GameObject:
   - component: {fileID: 5209907533895120246}
   m_Layer: 0
   m_Name: Sprite LightningBall
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4776,7 +4776,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 30
   opponent: Enemy
-  hitEffect: {fileID: 4673979590256856180, guid: 98192be70fa71334dae80bd32dc54ab2,
+  hitEffect: {fileID: 1762057121350532095, guid: 080d2530729cd0246b5fc2a0eb32e825,
     type: 3}
   UnAffectedTag: Transparent
 --- !u!114 &5209907533895120246

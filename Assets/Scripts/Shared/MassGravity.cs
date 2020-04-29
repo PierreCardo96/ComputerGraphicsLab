@@ -5,21 +5,29 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class MassGravity : MonoBehaviour
 {
-    public Planet planet;
+    [SerializeField]
+    float smooth = 1f;
+
     private void Awake()
     {
-        TurnOffPhysics();
+        FreezeRotation();
     }
 
-    private void TurnOffPhysics()
+    private void FreezeRotation()
     {
-        GetComponent<Rigidbody>().useGravity = false; //turn of the gravity to the "original planet" 
         GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation; //we rotate the rotations of the mass manually by the planet
     }
 
-    //Called Multiple times per frame in a constant rate
-    private void FixedUpdate()
+    // Update is called once per frame
+    void Update()
     {
-       planet.Attract(transform);
+        RaycastHit hitInfo;
+        float smooth = 1f;
+        Ray ray = new Ray(transform.position, -transform.up);
+        if (Physics.Raycast(ray, out hitInfo))
+        {
+            Quaternion target = Quaternion.FromToRotation(transform.up, hitInfo.normal) * transform.rotation;
+            transform.rotation = Quaternion.Lerp(transform.rotation, target, Time.deltaTime * smooth);
+        }
     }
 }

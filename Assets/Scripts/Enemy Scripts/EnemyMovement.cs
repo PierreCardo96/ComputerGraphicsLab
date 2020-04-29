@@ -21,7 +21,7 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField]
     float chaseDistance = 10f;
 
-
+    private bool isAttacked = false;
     private EnemyPatroling enemyPatroling;
     private EnemyAnimator enemyAnimator;
     private EnemyState enemyState = EnemyState.Patroling;
@@ -42,8 +42,8 @@ public class EnemyMovement : MonoBehaviour
         float playerDistance = Vector3.Distance(player.transform.position, transform.position);
         
         //player is alive, is in the radius and (is in the viewAngle or the enemy already attacking or chasing)
-        if (player.GetHealth() > 0 && playerDistance <= chaseDistance && 
-            (angle<=viewAngle || enemyState != EnemyState.Patroling ))
+        if (player.GetHealth() > 0 && (playerDistance <= chaseDistance && 
+            (angle<=viewAngle || enemyState != EnemyState.Patroling ) || isAttacked))
         {
             PlayerTracking(direction);
         }
@@ -83,5 +83,8 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
-
+    public void SetIsAttacked(bool value)
+    {
+        isAttacked = value;
+    }
 }

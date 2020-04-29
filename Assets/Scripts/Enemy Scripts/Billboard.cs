@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//It's responsible for making the health bar of the enemy facing the camera always
 public class Billboard : MonoBehaviour
 {
     private Camera playerCamera;

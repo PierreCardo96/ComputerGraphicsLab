@@ -32,26 +32,28 @@ public class PlayerMovement : MonoBehaviour
         float horizontalTranslation = horizontalMoveInput * speed * Time.deltaTime;
 
         transform.Translate(horizontalTranslation, 0, verticalTranslation);
-        UpdateAnimation(verticalTranslation, horizontalTranslation, isSprinting);
+        UpdateAnimation(verticalMoveInput, horizontalMoveInput, isSprinting);
+        
     }
 
-    private void UpdateAnimation(float verticalTranslation, float horizontalTranslation, bool isSprinting)
+    private void UpdateAnimation(float verticalMoveInput, float horizontalMoveInput, bool isSprinting)
     {
+        playerAnimator.ActivateWalkingAnimation(verticalMoveInput, horizontalMoveInput);
         if (isSprinting)
         {
             playerAnimator?.UpdatePlayerState(PlayerState.Sprinting);
         }
-        else if (verticalTranslation > 0)
-        {
-            playerAnimator?.UpdatePlayerState(PlayerState.RunningForward);
-        }
-        else if(verticalTranslation < 0)
-        {
-            playerAnimator?.UpdatePlayerState(PlayerState.RunningBackward);
-        }
-        else
-        {
-            playerAnimator?.UpdatePlayerState(PlayerState.Idle);
-        }
+        //else if (verticalMoveInput > 0)
+        //{
+        //    playerAnimator?.UpdatePlayerState(PlayerState.RunningForward);
+        //}
+        //else if(verticalMoveInput < 0)
+        //{
+        //    playerAnimator?.UpdatePlayerState(PlayerState.RunningBackward);
+        //}
+        //else
+        //{
+        //    playerAnimator?.UpdatePlayerState(PlayerState.Idle);
+        //}
     }
 }
