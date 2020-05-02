@@ -26,6 +26,7 @@ public class MassGravity : MonoBehaviour
         Ray ray = new Ray(transform.position, -transform.up);
         if (Physics.Raycast(ray, out hitInfo))
         {
+            transform.position = hitInfo.point;
             Quaternion target = Quaternion.FromToRotation(transform.up, hitInfo.normal) * transform.rotation;
             transform.rotation = Quaternion.Lerp(transform.rotation, target, Time.deltaTime * smooth);
         }

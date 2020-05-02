@@ -7,12 +7,12 @@ using UnityEngine.UI;
 public class PowersHotkey : MonoBehaviour
 {
 
-    [SerializeField]
-    ActionBar actionBar;
+    private ActionBar actionBar;
     private BallShooter ballShooter;
     
     private void Start()
     {
+        actionBar = FindObjectOfType<PlayerUI>().GetActionBar();
         ballShooter = GetComponentInChildren<BallShooter>();
     }
 

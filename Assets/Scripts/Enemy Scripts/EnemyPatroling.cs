@@ -12,9 +12,6 @@ public class EnemyPatroling : MonoBehaviour
     [SerializeField]
     int patrolingRadius = 5;
 
-    [SerializeField]
-    float terrainOffset = 10f;
-
     private List<Vector3> waypoints = new List<Vector3>();
     private int currentWaypoint = 0;
 
@@ -29,11 +26,11 @@ public class EnemyPatroling : MonoBehaviour
         int i = numberOfWaypoints;
         while (i > 0)
         {
-            float randX = UnityEngine.Random.Range(-patrolingRadius, patrolingRadius);
-            float randZ = UnityEngine.Random.Range(-patrolingRadius, patrolingRadius);
-            float yVal = Terrain.activeTerrain.SampleHeight(new Vector3(randX, 0, randZ));
-            Vector3 waypoint = new Vector3(randX, yVal - terrainOffset, randZ);
-            waypoints.Add(waypoint + transform.position);
+            float randX = Random.Range(transform.position.x - patrolingRadius, transform.position.x + patrolingRadius);
+            float randZ = Random.Range(transform.position.z - patrolingRadius, transform.position.z + patrolingRadius);
+            float yValue = Terrain.activeTerrain.SampleHeight(new Vector3(randX, 0, randZ));
+            Vector3 waypoint = new Vector3(randX, yValue, randZ);
+            waypoints.Add(waypoint);
             i--;
         }
     }
@@ -47,7 +44,7 @@ public class EnemyPatroling : MonoBehaviour
 
         if (Vector3.Distance(waypoints[currentWaypoint], transform.position) < accuracyWaypoint)
         {
-            currentWaypoint = UnityEngine.Random.Range(0, waypoints.Count);
+            currentWaypoint = Random.Range(0, waypoints.Count);
         }
         Vector3 direction = waypoints[currentWaypoint] - transform.position;
         transform.rotation = Quaternion.Slerp(transform.rotation,

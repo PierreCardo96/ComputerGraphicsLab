@@ -7,8 +7,7 @@ public class Health : MonoBehaviour
 {
     [SerializeField]
     float maxHealth = 100f;
-    [SerializeField]
-    Slider healthBar;
+    protected Slider healthBar;
 
     [SerializeField]
     Animator animator;

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Assets.Scripts
 {
@@ -12,6 +13,12 @@ namespace Assets.Scripts
         [SerializeField]
         float destructionDelay = 1f;
 
+        [SerializeField]
+        Slider healthBarSlider;
+        private void Awake()
+        {
+            healthBar = healthBarSlider;
+        }
         protected override void ProcessDeath()
         {
             base.ProcessDeath();

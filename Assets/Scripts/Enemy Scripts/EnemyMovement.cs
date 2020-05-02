@@ -6,8 +6,7 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
-    [SerializeField]
-    Player player;
+    private Player player;
 
     [SerializeField]
     float speed = 1.5f;
@@ -29,6 +28,7 @@ public class EnemyMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        player = FindObjectOfType<Player>();
         enemyPatroling = GetComponent<EnemyPatroling>();
         enemyAnimator = GetComponent<EnemyAnimator>();
     }
