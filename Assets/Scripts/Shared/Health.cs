@@ -9,9 +9,6 @@ public class Health : MonoBehaviour
     float maxHealth = 100f;
     protected Slider healthBar;
 
-    [SerializeField]
-    Animator animator;
-
     private float currentHealth;
 
     private void Start()
@@ -35,6 +32,5 @@ public class Health : MonoBehaviour
 
     protected virtual void ProcessDeath()
     {
-        animator.SetBool("isDead", true);
     }
 }

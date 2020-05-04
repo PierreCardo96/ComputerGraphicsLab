@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EnemyMovement : MonoBehaviour
 {
@@ -12,6 +13,10 @@ public class EnemyMovement : MonoBehaviour
     float speed = 1.5f;
     [SerializeField]
     float rotationSpeed = 1f;
+    [SerializeField]
+    float sprintingSpeed = 4f;
+    [SerializeField]
+    float rotationSprintingSpeed = 2.5f;
 
     [SerializeField]
     float viewAngle = 30f;
@@ -25,17 +30,21 @@ public class EnemyMovement : MonoBehaviour
     private EnemyAnimator enemyAnimator;
     private EnemyState enemyState = EnemyState.Patroling;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        player = FindObjectOfType<Player>();
         enemyPatroling = GetComponent<EnemyPatroling>();
         enemyAnimator = GetComponent<EnemyAnimator>();
+        player = FindObjectOfType<Player>();
     }
-
+    // Start is called before the first frame update
+    //void Start()
+    //{
+    //    player = FindObjectOfType<Player>();
+    //    enemyPatroling = GetComponent<EnemyPatroling>();
+    //    enemyAnimator = GetComponent<EnemyAnimator>();
+    //}
     public void ProcessEnemyMovement()
     {
-        
         Vector3 direction = player.transform.position - transform.position;
         float angle = Vector3.Angle(direction, transform.forward);
         direction.y = 0f;//TODO: Check if it is neccessary
@@ -55,7 +64,7 @@ public class EnemyMovement : MonoBehaviour
     private void ProcessChasing()
     {
         enemyState = EnemyState.Chasing;
-        transform.Translate(0, 0, speed * Time.deltaTime);
+        transform.Translate(0, 0, sprintingSpeed * Time.deltaTime);
         enemyAnimator.UpdateEnemyState(EnemyState.Chasing);
     }
     private void ProcessAttacking()
@@ -72,7 +81,7 @@ public class EnemyMovement : MonoBehaviour
     private void PlayerTracking(Vector3 direction)
     {
         transform.rotation = Quaternion.Slerp(transform.rotation,
-                                    Quaternion.LookRotation(direction), rotationSpeed * Time.deltaTime);
+                                    Quaternion.LookRotation(direction), rotationSprintingSpeed * Time.deltaTime);
         if (direction.magnitude > attackingDistance)
         {
             ProcessChasing();

@@ -42,7 +42,6 @@ public class BallShooter : MonoBehaviour
 
     public void Shoot()
     {
-        print("Shoot");
         GameObject ballEffect = Instantiate(currentPower, transform.position, Quaternion.identity);
         RaycastHit hit;
         if (Physics.Raycast(camera.transform.position, camera.transform.forward, out hit, range))
@@ -56,9 +55,6 @@ public class BallShooter : MonoBehaviour
     }
     private void ShootOnEnemy(GameObject ballEffect, RaycastHit hit)
     {
-        print("Raycast hit " + hit.transform.name);
-        print("Tag = " + hit.collider.gameObject.tag);
-
         Rigidbody rb = ballEffect.GetComponent<Rigidbody>();
         Vector3 direction = (hit.point - ballEffect.transform.position).normalized;
         rb.velocity = direction * speed;

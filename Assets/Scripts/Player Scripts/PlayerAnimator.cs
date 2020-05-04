@@ -85,7 +85,11 @@ public class PlayerAnimator : MonoBehaviour
 
     public void SpawnFireBall()
     {
-        print("FireBall Event");
         ballSpawner.Shoot();
+    }
+
+    public void Die()
+    {
+        animator.SetBool("isDead", true);
     }
 }

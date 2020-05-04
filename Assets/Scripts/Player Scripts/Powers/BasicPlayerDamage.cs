@@ -11,7 +11,6 @@ public class BasicPlayerDamage : Damage
     string UnAffectedTag;
     protected override void OnTriggerEnter(Collider other)
     {
-        print("Player triggered " + other.name);
         if (other.gameObject.tag != UnAffectedTag)
         {
             base.OnTriggerEnter(other);

@@ -21,7 +21,7 @@ namespace Assets.Scripts
         }
         protected override void ProcessDeath()
         {
-            base.ProcessDeath();
+            GetComponent<EnemyAnimator>().Die();
             Destroy(gameObject, destructionDelay);
         }
     }

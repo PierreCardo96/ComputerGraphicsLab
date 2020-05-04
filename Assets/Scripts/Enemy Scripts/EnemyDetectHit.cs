@@ -10,24 +10,18 @@ public class EnemyDetectHit : MonoBehaviour
     [SerializeField]
     float chasingForAttackingTime = 10f;
 
-    private EnemyMovement enemyMovement;
-
-    private void Start()
-    {
-        enemyMovement = GetComponent<EnemyMovement>();
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == opponent)
         {
-            enemyMovement.SetIsAttacked(true);
+            //it calls all the methods SetIsAttacked in this gameobject and all of his childrens
+            BroadcastMessage("SetIsAttacked", true);
             Invoke("SetIsAttackedToFalse", chasingForAttackingTime);
         }
     }
 
     private void SetIsAttackedToFalse()
     {
-        enemyMovement.SetIsAttacked(false);
+        BroadcastMessage("SetIsAttacked", false);
     }
 }

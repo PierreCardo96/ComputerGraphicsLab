@@ -6,10 +6,14 @@ using UnityEngine;
 public class EnemyAnimator : MonoBehaviour
 {
     private Animator animator;
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
+    }
     // Start is called before the first frame update
     void Start()
     {
-        animator = GetComponent<Animator>();
+        //animator = GetComponent<Animator>();
     }
 
     public void UpdateEnemyState(EnemyState state)
@@ -38,5 +42,10 @@ public class EnemyAnimator : MonoBehaviour
                 animator.SetBool("isChasing", false);
                 break;
         }
+    }
+
+    public void Die()
+    {
+        animator.SetBool("isDead", true);
     }
 }

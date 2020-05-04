@@ -15,9 +15,8 @@ namespace Assets.Scripts
         }
         protected override void ProcessDeath()
         {
-            base.ProcessDeath();
-            //FindObjectOfType<MouseMovement>().enabled = false;
-            //FindObjectOfType<FireBallSpawner>().enabled = false;
+            GetComponentInChildren<PlayerAnimator>().Die();
+            GetComponent<DeathHandler>().HandleDeath();
             GetComponent<PlayerInputHandler>().enabled = false;
         }
     }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -38,7 +39,6 @@ public class EnemySpawner : MonoBehaviour
         float yValue = Terrain.activeTerrain.SampleHeight(new Vector3(randX, 0, randZ));
         
         yValue = yValue + yOffset;
-        print(new Vector3(randX, yValue, randZ));
         GameObject enemy = Instantiate(enemyPrefab, new Vector3(randX, yValue, randZ), Quaternion.identity);
         enemy.transform.parent = transform;
     }

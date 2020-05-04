@@ -24,16 +24,5 @@ public class PlayerInputHandler : MonoBehaviour
         playerAttacking.RespondToAttackingInput();
         mouseMovement.RespondToMouseMovement();
         powersHotkey.RespondToHotKey();
-
-        //RaycastHit hitInfo;
-        //float smooth = 1f;
-        //GameObject x = GetComponent<Player>().gameObject;
-        //Ray ray = new Ray(x.transform.position, -x.transform.up);
-        //if (Physics.Raycast(ray, out hitInfo))
-        //{
-        //    print("Ground it");
-        //    Quaternion target = Quaternion.FromToRotation(x.transform.up, hitInfo.normal) * x.transform.rotation;
-        //    x.transform.rotation = Quaternion.Lerp(x.transform.rotation, target, Time.deltaTime * smooth);
-        //}
     }
 }

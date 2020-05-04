@@ -48,9 +48,11 @@ public class Radar : MonoBehaviour
         if (distance > radarRadius)
         {
             DrawPointOnBorder();
+            print("outside");
         }
         else
         {
+            print("inside");
             DrawPointInsideRadar();
         }
     }
@@ -58,12 +60,15 @@ public class Radar : MonoBehaviour
     private void DrawPointOnBorder()
     {
         playerRadarPoint.LookAt(destinationObject.transform);
-        destinationRadarPoint.transform.position = playerRadarPoint.transform.position + radarRadius * playerRadarPoint.forward;
+        Vector3 vec = playerRadarPoint.transform.position + radarRadius * new Vector3(playerRadarPoint.forward.x, 0, playerRadarPoint.forward.z).normalized;
+        destinationRadarPoint.transform.position = vec;
+        //destinationRadarPoint.transform.position = playerRadarPoint.transform.position + radarRadius * playerRadarPoint.forward;
 
     }
 
     private void DrawPointInsideRadar()
     {
+        //destinationRadarPoint.transform.position = new Vector3(destinationObject.transform.position.x, 0, destinationObject.transform.position.z);
         destinationRadarPoint.transform.position = destinationObject.transform.position;
     }
 
