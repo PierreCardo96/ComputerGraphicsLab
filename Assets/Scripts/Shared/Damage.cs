@@ -5,24 +5,13 @@ using UnityEngine;
 public class Damage : MonoBehaviour
 {
     [SerializeField]
-    float damage = 30f;
+    protected float damage = 30f;
 
     [SerializeField]
-    string opponent;
+    protected string opponent;
 
-
-
-    protected virtual void OnTriggerEnter(Collider other)
+    protected void DamageOpponent(Health opponentHealth)
     {
-        DamageOponent(other);
-    }
-
-    private void DamageOponent(Collider other)
-    {
-        if (other.gameObject.tag == opponent)
-        {
-            Health target = other.gameObject.GetComponent<Health>();
-            target?.TakeDamage(damage);
-        }
+        opponentHealth?.TakeDamage(damage);
     }
 }

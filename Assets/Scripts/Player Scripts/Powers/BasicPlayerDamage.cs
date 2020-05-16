@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BasicPlayerDamage : Damage
+public class BasicPlayerDamage : DamageOnCollision
 {
     [SerializeField]
     GameObject hitEffect;
@@ -15,6 +15,7 @@ public class BasicPlayerDamage : Damage
         {
             base.OnTriggerEnter(other);
             Instantiate(hitEffect, transform.position, Quaternion.identity);
+            FindObjectOfType<AudioManager>().Play("Explosion");
             Destroy(gameObject);
         }
     }

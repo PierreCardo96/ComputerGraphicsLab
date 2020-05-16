@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class Loading : MonoBehaviour
 {
+    public static int sceneIndex = 0;
 
     [SerializeField]
     float timeToLoad = 3;
@@ -28,7 +29,7 @@ public class Loading : MonoBehaviour
         }
         else
         {
-            FindObjectOfType<SceneLoader>().LoadFirstLevel();
+            FindObjectOfType<SceneLoader>().LoadLevel(sceneIndex);
         }
     }
 }

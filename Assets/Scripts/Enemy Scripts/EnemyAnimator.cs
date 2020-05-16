@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts;
+using Assets.Scripts.Enemy_Scripts;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -47,5 +48,10 @@ public class EnemyAnimator : MonoBehaviour
     public void Die()
     {
         animator.SetBool("isDead", true);
+    }
+
+    public void DamagePlayer()
+    {
+        GetComponent<EnemyDamage>().Damage();
     }
 }

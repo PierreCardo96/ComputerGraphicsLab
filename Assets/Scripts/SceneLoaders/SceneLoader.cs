@@ -1,15 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
-{
-    public void LoadFirstLevel()
-    {
-        SceneManager.LoadScene(0);
-    }
-
+{   
     public void LoadLoadingScene()
     {
         SceneManager.LoadScene("LoadingScene");
@@ -27,16 +23,22 @@ public class SceneLoader : MonoBehaviour
     public void LoadNextLevel()
     {
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        int nextSceneIndex = currentSceneIndex + 1;
-        if (nextSceneIndex == 3)
+        Loading.sceneIndex = currentSceneIndex + 1;
+        if (Loading.sceneIndex == 3)
         {
             SceneManager.LoadScene("Winner");
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
+            Loading.sceneIndex = 0;
         }
         else
         {
-            SceneManager.LoadScene(nextSceneIndex);
+            LoadLoadingScene();
         }
+    }
+
+    public void LoadLevel(int index)
+    {
+        SceneManager.LoadScene(index);
     }
 }

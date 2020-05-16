@@ -44,21 +44,6 @@ public class PlayerAnimator : MonoBehaviour
         playerState = state;
         switch (playerState)
         {
-            //case PlayerState.RunningForward:
-            //    animator.SetBool("isRunningForward", true);
-            //    animator.SetBool("isRunningBackward", false);
-            //    animator.SetBool("isSprinting", false);
-            //    animator.SetBool("isFireBalling", false);
-            //
-            //    break;
-            //
-            //case PlayerState.RunningBackward:
-            //    animator.SetBool("isRunningBackward", true);
-            //    animator.SetBool("isRunningForward", false);
-            //    animator.SetBool("isSprinting", false);
-            //    animator.SetBool("isFireBalling", false);
-            //
-            //    break;
             case PlayerState.Sprinting:
                 animator.SetBool("isSprinting", true);
                 animator.SetBool("isFireBalling", false);
@@ -67,8 +52,6 @@ public class PlayerAnimator : MonoBehaviour
                 animator.SetBool("isFireBalling", true);
                 break;
             default:
-                //animator.SetBool("isRunningForward", false);
-                //animator.SetBool("isRunningBackward", false);
                 animator.SetBool("isSprinting", false);
                 animator.SetBool("isFireBalling", false);
                 break;

@@ -7,11 +7,18 @@ using UnityEngine;
 
 namespace Assets.Scripts.Enemy_Scripts
 {
-    public class EnemyDamage : Damage
+    public class EnemyDamage : DamageOnCollision
     {
-        protected override void OnTriggerEnter(Collider other)
+        private Health playerHealth;
+
+        private void Start()
         {
-            base.OnTriggerEnter(other);
+            playerHealth = FindObjectOfType<PlayerHealth>();
+        }
+
+        public void Damage()
+        {
+            DamageOpponent(playerHealth);
         }
     }
 }

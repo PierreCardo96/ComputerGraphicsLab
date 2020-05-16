@@ -48,10 +48,7 @@ public class BallShooter : MonoBehaviour
         {
             ShootOnEnemy(ballEffect, hit);
         }
-        //else
-        //{
-        //    ShootInTheAir(ballEffect);
-        //}
+        FindObjectOfType<AudioManager>().Play("FireBall");
     }
     private void ShootOnEnemy(GameObject ballEffect, RaycastHit hit)
     {
@@ -59,14 +56,6 @@ public class BallShooter : MonoBehaviour
         Vector3 direction = (hit.point - ballEffect.transform.position).normalized;
         rb.velocity = direction * speed;
     }
-    //private void ShootInTheAir(GameObject ballEffect)
-    //{
-    //    Rigidbody rb = ballEffect.GetComponent<Rigidbody>();
-    //    Vector3 direction = camera.transform.forward;
-    //    Vector3 dest = camera.transform.forward * 10;
-    //    direction = (dest - ballEffect.transform.position).normalized;
-    //    rb.velocity = direction * speed;
-    //}
 
     public void SetPower(PowerType powerType)
     {
