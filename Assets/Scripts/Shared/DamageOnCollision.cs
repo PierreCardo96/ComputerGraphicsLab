@@ -9,7 +9,7 @@ public class DamageOnCollision : Damage
         DamageOponent(other);
     }
 
-    private void DamageOponent(Collider other)
+    protected void DamageOponent(Collider other)
     {
         if (other.gameObject.tag == opponent)
         {

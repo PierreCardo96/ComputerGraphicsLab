@@ -14,10 +14,15 @@ public class EnemyDetectHit : MonoBehaviour
     {
         if (other.gameObject.tag == opponent)
         {
-            //it calls all the methods SetIsAttacked in this gameobject and all of his childrens
-            BroadcastMessage("SetIsAttacked", true);
-            Invoke("SetIsAttackedToFalse", chasingForAttackingTime);
+            BroadcastMessageOnAttacked();
         }
+    }
+
+    public void BroadcastMessageOnAttacked()
+    {
+        //it calls all the methods SetIsAttacked in this gameobject and all of his childrens
+        BroadcastMessage("SetIsAttacked", true);
+        Invoke("SetIsAttackedToFalse", chasingForAttackingTime);
     }
 
     private void SetIsAttackedToFalse()

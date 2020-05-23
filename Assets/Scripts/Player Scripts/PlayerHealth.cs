@@ -9,10 +9,26 @@ namespace Assets.Scripts
 {
     public class PlayerHealth : Health
     {
-        private void Awake()
+        //private void Awake()
+        //{
+        //    healthBar = PlayerUI.Instance.GetHealthBarSlider();
+        //}
+
+        private void Start()
         {
-            healthBar = FindObjectOfType<PlayerUI>().GetHealthBarSlider();
+            healthBar = PlayerUI.Instance.GetHealthBarSlider();
         }
+
+        public void IncreaseHealth(int healthAmount)
+        {
+            currentHealth += healthAmount;
+            if(currentHealth > maxHealth)
+            {
+                currentHealth = maxHealth;
+            }
+            healthBar.value = currentHealth / maxHealth;
+        }
+
         protected override void ProcessDeath()
         {
             GetComponentInChildren<PlayerAnimator>().Die();

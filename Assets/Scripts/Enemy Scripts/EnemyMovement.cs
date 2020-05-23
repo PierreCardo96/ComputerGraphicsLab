@@ -27,6 +27,9 @@ public class EnemyMovement : MonoBehaviour
 
     private bool isAttacked = false;
     private EnemyPatroling enemyPatroling;
+
+
+
     private EnemyAnimator enemyAnimator;
     private EnemyState enemyState = EnemyState.Patroling;
 
@@ -95,5 +98,23 @@ public class EnemyMovement : MonoBehaviour
     public void SetIsAttacked(bool value)
     {
         isAttacked = value;
+    }
+
+    public void SlowDownMovement(float slowDownFactor)
+    {
+        if(slowDownFactor == 0)
+        {
+            return;
+        }
+
+        speed /= slowDownFactor;
+        rotationSpeed /= slowDownFactor;
+
+        sprintingSpeed /= slowDownFactor;
+        rotationSprintingSpeed /= slowDownFactor;
+    }
+    public void CancelSlowDownMovement(float speedUpFactor)
+    {
+        SlowDownMovement(1 / speedUpFactor);
     }
 }

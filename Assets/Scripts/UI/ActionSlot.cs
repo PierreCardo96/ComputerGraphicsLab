@@ -8,20 +8,19 @@ using UnityEngine.UI;
 public class ActionSlot : MonoBehaviour
 {
     [SerializeField]
-    private PowerType powerType = PowerType.FireBall;
+    private PowerType powerType = PowerType.WhiteBall;
     private RawImage powerImage;
     private RawImage[] borders;
 
     [SerializeField]
     private bool isActive = false;
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         powerImage = GetComponent<RawImage>();
         borders = GetComponentsInChildren<RawImage>();
     }
-
+    
     public void Select()
     {
         ColorBorders(Color.red);

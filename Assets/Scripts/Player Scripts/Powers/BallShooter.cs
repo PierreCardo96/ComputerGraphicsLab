@@ -7,12 +7,6 @@ using UnityEngine;
 
 public class BallShooter : MonoBehaviour
 {
-    public enum BallType
-    {
-        Fire,
-        Ice,
-        Lightning
-    }
     
     [SerializeField]
     Camera camera;
@@ -23,7 +17,7 @@ public class BallShooter : MonoBehaviour
     float range = 100f;
 
     [SerializeField]
-    GameObject[] powers = new GameObject[3];
+    GameObject[] powers = new GameObject[4];
 
     [SerializeField]
     GameObject currentPower;
@@ -33,6 +27,7 @@ public class BallShooter : MonoBehaviour
 
     [SerializeField]
     float angle;
+    private PowerType currentPowerType = PowerType.WhiteBall;
     private readonly string PlayerTag = "Player";
 
     private void Start()
@@ -48,28 +43,58 @@ public class BallShooter : MonoBehaviour
         {
             ShootOnEnemy(ballEffect, hit);
         }
-        FindObjectOfType<AudioManager>().Play("FireBall");
+        PlayShootingSound();
     }
+
+    private void PlayShootingSound()
+    {
+        switch(currentPowerType)
+        {
+            case PowerType.WhiteBall:
+                FindObjectOfType<AudioManager>().Play("WhiteBall");
+                break;
+            case PowerType.FireBall:
+                FindObjectOfType<AudioManager>().Play("FireBall");
+                break;
+            case PowerType.IceBall:
+                FindObjectOfType<AudioManager>().Play("IceBall");
+                break;
+            case PowerType.LightningBall:
+                FindObjectOfType<AudioManager>().Play("LightningBall");
+                break;
+        }
+        
+    }
+
     private void ShootOnEnemy(GameObject ballEffect, RaycastHit hit)
     {
-        Rigidbody rb = ballEffect.GetComponent<Rigidbody>();
+        Rigidbody rigidBody = ballEffect.GetComponent<Rigidbody>();
         Vector3 direction = (hit.point - ballEffect.transform.position).normalized;
-        rb.velocity = direction * speed;
+        rigidBody.velocity = direction * speed;
     }
 
     public void SetPower(PowerType powerType)
     {
-        switch (powerType)
+        currentPowerType = powerType;
+        switch (currentPowerType)
         {
-            case PowerType.FireBall:
+            case PowerType.WhiteBall:
                 currentPower = powers[0];
                 break;
-            case PowerType.IceBall:
+            case PowerType.FireBall:
                 currentPower = powers[1];
                 break;
-            case PowerType.LightningBall:
+            case PowerType.IceBall:
                 currentPower = powers[2];
                 break;
+            case PowerType.LightningBall:
+                currentPower = powers[3];
+                break;
         }
+    }
+
+    public PowerType GetCurrentPowerType()
+    {
+        return currentPowerType;
     }
 }

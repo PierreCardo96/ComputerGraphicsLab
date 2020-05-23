@@ -25,10 +25,10 @@ public class Loading : MonoBehaviour
         {
             time += Time.deltaTime;
             loadingBar.value = time / timeToLoad;
-        
         }
         else
         {
+            FindObjectOfType<AudioManager>().Play("Bell");
             FindObjectOfType<SceneLoader>().LoadLevel(sceneIndex);
         }
     }

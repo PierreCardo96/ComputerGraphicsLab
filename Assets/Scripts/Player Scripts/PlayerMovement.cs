@@ -43,17 +43,5 @@ public class PlayerMovement : MonoBehaviour
         {
             playerAnimator?.UpdatePlayerState(PlayerState.Sprinting);
         }
-        //else if (verticalMoveInput > 0)
-        //{
-        //    playerAnimator?.UpdatePlayerState(PlayerState.RunningForward);
-        //}
-        //else if(verticalMoveInput < 0)
-        //{
-        //    playerAnimator?.UpdatePlayerState(PlayerState.RunningBackward);
-        //}
-        //else
-        //{
-        //    playerAnimator?.UpdatePlayerState(PlayerState.Idle);
-        //}
     }
 }

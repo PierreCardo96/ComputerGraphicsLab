@@ -24,10 +24,6 @@ public class MiniMap : MonoBehaviour
     {
         foreach(MapIconModel mapObject in mapIconModels)
         {
-            if(mapObject.GameObjectRefernce == null)
-            {
-                print("HI");
-            }
             Vector3 screenPos = mapCamera.WorldToViewportPoint(mapObject.GameObjectRefernce.transform.position);
             mapObject.Icon.transform.SetParent(this.transform);
 

@@ -21,4 +21,9 @@ public class PlayerAttacking : MonoBehaviour
             playerAnimator?.UpdatePlayerState(PlayerState.FireBalling);
         }
     }
+
+    public void ProcessEarthquake()
+    {
+        playerAnimator?.UpdatePlayerState(PlayerState.JumpAttacking);
+    }
 }

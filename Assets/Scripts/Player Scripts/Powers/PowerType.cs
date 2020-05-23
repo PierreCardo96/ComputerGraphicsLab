@@ -8,8 +8,10 @@ namespace Assets.Scripts.Player_Scripts.Powers
 {
     public enum PowerType
     {
+        WhiteBall,
         FireBall,
         IceBall,
-        LightningBall
+        LightningBall,
+        Earthquake
     }
 }

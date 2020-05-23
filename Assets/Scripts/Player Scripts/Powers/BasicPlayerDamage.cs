@@ -2,21 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BasicPlayerDamage : DamageOnCollision
+public abstract class BasicPlayerDamage : DamageOnCollision
 {
     [SerializeField]
-    GameObject hitEffect;
+    protected GameObject hitEffect;
 
     [SerializeField]
-    string UnAffectedTag;
+    protected string UnAffectedTag;
+
+    [SerializeField]
+    protected float destroyDelay = 0f;
+
     protected override void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag != UnAffectedTag)
-        {
-            base.OnTriggerEnter(other);
-            Instantiate(hitEffect, transform.position, Quaternion.identity);
-            FindObjectOfType<AudioManager>().Play("Explosion");
-            Destroy(gameObject);
-        }
+        base.OnTriggerEnter(other);
+        Instantiate(hitEffect, transform.position, Quaternion.identity);
+        Destroy(gameObject, destroyDelay);
     }
 }

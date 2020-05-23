@@ -7,10 +7,9 @@ using UnityEngine;
 public class ActionBar : MonoBehaviour
 {
     private ActionSlot[] actionSlots;
-    private PowerType currentPowerType;
+    private PowerType currentPowerType = PowerType.WhiteBall;
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         actionSlots = GetComponentsInChildren<ActionSlot>();
     }
@@ -44,11 +43,24 @@ public class ActionBar : MonoBehaviour
         return false;
     }
 
-    public void SetAllPowersActivation(bool value)
+    public void UnselectAll()
     {
+        currentPowerType = PowerType.WhiteBall;
         foreach (ActionSlot actionSlot in actionSlots)
         {
+            actionSlot.UnSelect();
+        }
+    }
+
+    public void SetAllPowersActivation(bool value)
+    {
+        currentPowerType = PowerType.WhiteBall;
+        foreach (ActionSlot actionSlot in actionSlots)
+        {
+            actionSlot.UnSelect();
             actionSlot.SetIsActive(value);
         }
     }
+
+
 }

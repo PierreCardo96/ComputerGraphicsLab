@@ -18,6 +18,9 @@ public class PlayerAnimator : MonoBehaviour
     [SerializeField]
     BallShooter ballSpawner;
 
+    [SerializeField]
+    EarthquakeSpawner earthquakeSpawner;
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -47,13 +50,18 @@ public class PlayerAnimator : MonoBehaviour
             case PlayerState.Sprinting:
                 animator.SetBool("isSprinting", true);
                 animator.SetBool("isFireBalling", false);
+                animator.SetBool("isJumpAttacking", false);
                 break;
             case PlayerState.FireBalling:
                 animator.SetBool("isFireBalling", true);
                 break;
+            case PlayerState.JumpAttacking:
+                animator.SetBool("isJumpAttacking", true);
+                break;
             default:
                 animator.SetBool("isSprinting", false);
                 animator.SetBool("isFireBalling", false);
+                animator.SetBool("isJumpAttacking", false);
                 break;
         }
     }
@@ -64,6 +72,7 @@ public class PlayerAnimator : MonoBehaviour
         animator.SetFloat("MoveX", horizontalMoveInput);
         animator.SetBool("isSprinting", false);
         animator.SetBool("isFireBalling", false);
+        animator.SetBool("isJumpAttacking", false);
     }
 
     public void SpawnFireBall()
@@ -71,6 +80,10 @@ public class PlayerAnimator : MonoBehaviour
         ballSpawner.Shoot();
     }
 
+    public void SpawnEarthquake()
+    {
+        earthquakeSpawner.Spawn();
+    }
     public void Die()
     {
         animator.SetBool("isDead", true);

@@ -11,11 +11,6 @@ public class EnemyAnimator : MonoBehaviour
     {
         animator = GetComponent<Animator>();
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        //animator = GetComponent<Animator>();
-    }
 
     public void UpdateEnemyState(EnemyState state)
     {
@@ -47,6 +42,7 @@ public class EnemyAnimator : MonoBehaviour
 
     public void Die()
     {
+        FindObjectOfType<AudioManager>().Play("EnemyDeath");
         animator.SetBool("isDead", true);
     }
 

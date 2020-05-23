@@ -18,6 +18,7 @@ namespace Assets.Scripts.Enemy_Scripts
 
         public void Damage()
         {
+            FindObjectOfType<AudioManager>().Play("PlayerHurt");
             DamageOpponent(playerHealth);
         }
     }

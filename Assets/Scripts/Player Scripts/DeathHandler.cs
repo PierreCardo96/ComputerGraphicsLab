@@ -13,6 +13,7 @@ public class DeathHandler : MonoBehaviour
 
     public void HandleDeath()
     {
+        FindObjectOfType<AudioManager>().Play("PlayerDeath");
         gameOverCanvas.enabled = true;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;

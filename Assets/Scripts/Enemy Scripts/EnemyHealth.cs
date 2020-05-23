@@ -15,7 +15,7 @@ namespace Assets.Scripts
 
         [SerializeField]
         Slider healthBarSlider;
-        private void Awake()
+        private void Start()
         {
             healthBar = healthBarSlider;
         }

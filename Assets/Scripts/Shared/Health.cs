@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Health : MonoBehaviour
+public abstract class Health : MonoBehaviour
 {
     [SerializeField]
-    float maxHealth = 100f;
+    protected float maxHealth = 100f;
     protected Slider healthBar;
 
-    private float currentHealth;
+    protected float currentHealth;
 
-    private void Start()
+    private void Awake()
     {
         currentHealth = maxHealth;
     }
@@ -30,7 +30,5 @@ public class Health : MonoBehaviour
         }
     }
 
-    protected virtual void ProcessDeath()
-    {
-    }
+    protected abstract void ProcessDeath();
 }
