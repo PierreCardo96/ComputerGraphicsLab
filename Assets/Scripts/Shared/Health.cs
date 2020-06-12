@@ -20,7 +20,7 @@ public abstract class Health : MonoBehaviour
         return healthBar.value;
     }
 
-    public void TakeDamage(float damage)
+    public virtual void TakeDamage(float damage)
     {
         currentHealth -= damage;
         healthBar.value = currentHealth / maxHealth;

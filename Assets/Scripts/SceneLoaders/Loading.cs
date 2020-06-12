@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Loading : MonoBehaviour
 {
-    public static int sceneIndex = 0;
+    public static int sceneIndex = 1;
 
     [SerializeField]
     float timeToLoad = 3;

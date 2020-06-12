@@ -31,6 +31,17 @@ public class ActionBar : MonoBehaviour
         }
     }
 
+    public void ActivatePower(PowerType powerType)
+    {
+        foreach (ActionSlot actionSlot in actionSlots)
+        {
+            if (actionSlot.GetPowerType() == powerType)
+            {
+                actionSlot.SetIsActive(true);
+            }
+        }
+    }
+
     public bool IsPowerActive(PowerType powerType)
     {
         foreach (ActionSlot actionSlot in actionSlots)
@@ -52,7 +63,7 @@ public class ActionBar : MonoBehaviour
         }
     }
 
-    public void SetAllPowersActivation(bool value)
+    public void SetAllKeysActivation(bool value)
     {
         currentPowerType = PowerType.WhiteBall;
         foreach (ActionSlot actionSlot in actionSlots)

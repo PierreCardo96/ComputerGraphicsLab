@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,11 +8,11 @@ public class PlayerUI : MonoBehaviour
 {
     public static PlayerUI Instance = null;
     [SerializeField]
-    Text distanceText;
-    [SerializeField]
     ActionBar actionBar;
     [SerializeField]
     Slider healthBarSlider;
+    [SerializeField]
+    Text healthText;
 
     private void Awake()
     {
@@ -21,14 +22,15 @@ public class PlayerUI : MonoBehaviour
         }
         else
         {
+            SetAllPowersActivation(false);
             DontDestroyOnLoad(gameObject);
             Instance = this;
         }
     }
 
-    public Text GetDistanceText()
+    public Text GetHealthText()
     {
-        return distanceText;
+        return healthText;
     }
 
     public ActionBar GetActionBar()
@@ -44,10 +46,16 @@ public class PlayerUI : MonoBehaviour
     public void ResetHealth()
     {
         healthBarSlider.value = 1;
+        healthText.text = "Health: 100";
     }
 
     public void UnselectPowers()
     {
         actionBar.UnselectAll();
+    }
+
+    public void SetAllPowersActivation(bool value)
+    {
+        actionBar.SetAllKeysActivation(value);
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,6 +17,7 @@ public class Player : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
     }
 
+
     // Update is called once per frame
     void Update()
     {
@@ -32,5 +34,11 @@ public class Player : MonoBehaviour
    public float GetHealth()
     {
         return playerHealth.GetHealth();
+    }
+
+    public void IncreasePowers(int factor)
+    {
+        FindObjectOfType<BallShooter>().IncreaseDamageOfPowers(factor);    
+        FindObjectOfType<EarthquakeSpawner>().IncreaseDamageOfPower(factor);    
     }
 }

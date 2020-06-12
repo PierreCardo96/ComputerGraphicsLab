@@ -9,15 +9,15 @@ public class DestinationContoller : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //destination.SetActive(false);
+        destination.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        //if(FindObjectsOfType<Enemy>().Length == 0)
-        //{
-        //    destination.SetActive(true);
-        //}
+        if(FindObjectsOfType<Enemy>().Length == 0)
+        {
+            destination.SetActive(true);
+        }
     }
 }

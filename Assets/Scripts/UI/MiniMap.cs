@@ -31,8 +31,8 @@ public class MiniMap : MonoBehaviour
             Vector3[] corners = new Vector3[4];
             rt.GetWorldCorners(corners);
 
-            screenPos.x = Mathf.Clamp(screenPos.x * rt.rect.width + corners[0].x, corners[0].x, corners[2].x);
-            screenPos.y = Mathf.Clamp(screenPos.y * rt.rect.height + corners[0].y, corners[0].y, corners[2].y);
+            screenPos.x = screenPos.x * rt.rect.width + corners[0].x;
+            screenPos.y = screenPos.y * rt.rect.height + corners[0].y;
             screenPos.z = 0;
             mapObject.Icon.transform.position = screenPos;
         }

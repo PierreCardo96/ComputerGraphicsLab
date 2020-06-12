@@ -25,7 +25,6 @@ public class Radar : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        distanceText = FindObjectOfType<PlayerUI>().GetDistanceText();
         InitializeRadarPoints();
     }
 

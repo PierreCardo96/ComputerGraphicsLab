@@ -6,13 +6,18 @@ using UnityEngine;
 public class EarthquakeSpawner : MonoBehaviour
 {
     [SerializeField]
-    GameObject earthquakePrefab;
+    BasicPlayerDamage earthquakePrefab;
 
     [SerializeField]
     Transform parentTransform;
+
+    private void Start()
+    {
+        earthquakePrefab.damage = 500;
+    }
     public void Spawn()
     {
-        GameObject prefab = Instantiate(earthquakePrefab, parentTransform.position + parentTransform.forward, Quaternion.identity);
+        BasicPlayerDamage prefab = Instantiate(earthquakePrefab, parentTransform.position + parentTransform.forward, Quaternion.identity);
         prefab.transform.rotation = parentTransform.rotation;
         PlayEarthquakeSound();
     }
@@ -25,5 +30,10 @@ public class EarthquakeSpawner : MonoBehaviour
     public EarthquakeDamage GetEarthquakePrefab()
     {
         return earthquakePrefab.GetComponent<EarthquakeDamage>();
+    }
+
+    public void IncreaseDamageOfPower(int factor)
+    {
+        earthquakePrefab.damage *= factor;
     }
 }

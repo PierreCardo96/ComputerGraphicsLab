@@ -7,23 +7,6 @@ using UnityEngine.SceneManagement;
 public class SceneLoader : MonoBehaviour
 {
     private AudioManager _audioManager;
-    //private void Awake()
-    //{
-    //    if (FindObjectsOfType<SceneLoader>().Length > 1)
-    //    {
-    //        Destroy(gameObject);
-    //        return;
-    //    }
-    //    else
-    //    {
-    //        _audioManager = FindObjectOfType<AudioManager>();
-    //        DontDestroyOnLoad(gameObject);
-    //    }
-    //}
-    //private void Start()
-    //{
-    //    _audioManager = FindObjectOfType<AudioManager>();
-    //}
 
     public void LoadLoadingScene()
     {
@@ -32,7 +15,6 @@ public class SceneLoader : MonoBehaviour
     }
     public void QuitToMenu()
     {
-        //FindObjectOfType<AudioManager>().Play("Menu");        
         SceneManager.LoadScene("Menu");
     }
 
@@ -45,12 +27,12 @@ public class SceneLoader : MonoBehaviour
     {
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         Loading.sceneIndex = currentSceneIndex + 1;
-        if (Loading.sceneIndex == 3)
+        if (Loading.sceneIndex == 4)
         {
             SceneManager.LoadScene("Winner");
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
-            Loading.sceneIndex = 0;
+            Loading.sceneIndex = 1;
         }
         else
         {
@@ -65,8 +47,11 @@ public class SceneLoader : MonoBehaviour
 
     public void LoadFirstLevel()
     {
+        Time.timeScale = 1f;
         PlayerUI.Instance?.ResetHealth();
-        Loading.sceneIndex = 0;
+        PlayerUI.Instance?.SetAllPowersActivation(false);
+        AudioManager.Instance?.Play("Background");
+        Loading.sceneIndex = 1;
         LoadLoadingScene();
     }
 
@@ -85,11 +70,12 @@ public class SceneLoader : MonoBehaviour
     private void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
     {
         _audioManager = AudioManager.Instance;
-        _audioManager.StopMusics();
+        _audioManager.StopMusicsForLoading();
 
         string currentSceneName = scene.name;
         if (currentSceneName == "Menu" || currentSceneName == "Winner")
         {
+            _audioManager.StopAllMusics();
             _audioManager.Play(currentSceneName);
         }
     }

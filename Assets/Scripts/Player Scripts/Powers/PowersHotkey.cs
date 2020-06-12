@@ -41,11 +41,11 @@ public class PowersHotkey : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Alpha0))
         {
-            actionBar.SetAllPowersActivation(true);
+            actionBar.SetAllKeysActivation(true);
         }
         if (Input.GetKeyDown(KeyCode.Alpha9))
         {
-            actionBar.SetAllPowersActivation(false);
+            actionBar.SetAllKeysActivation(false);
         }
     }
 
