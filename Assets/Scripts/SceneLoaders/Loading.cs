@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Loading : MonoBehaviour
 {
-    public static int sceneIndex = 0;
+    public static int sceneIndex = 1;
 
     [SerializeField]
     float timeToLoad = 3;
@@ -16,6 +16,7 @@ public class Loading : MonoBehaviour
     void Start()
     {
         loadingBar = GetComponentInChildren<Slider>();
+        Time.timeScale = 1f;
     }
 
     // Update is called once per frame

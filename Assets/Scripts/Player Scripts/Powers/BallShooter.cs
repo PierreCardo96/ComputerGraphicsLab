@@ -17,10 +17,10 @@ public class BallShooter : MonoBehaviour
     float range = 100f;
 
     [SerializeField]
-    GameObject[] powers = new GameObject[4];
+    BasicPlayerDamage[] powers = new BasicPlayerDamage[4];
 
     [SerializeField]
-    GameObject currentPower;
+    BasicPlayerDamage currentPower;
 
     [SerializeField]
     float speed = 10f;
@@ -33,11 +33,20 @@ public class BallShooter : MonoBehaviour
     private void Start()
     {
         currentPower = powers[0];
+        InitializePowerDamage();
+    }
+
+    private void InitializePowerDamage()
+    {
+        powers[0].damage = 20f;
+        powers[1].damage = 150f;
+        powers[2].damage = 15f;
+        powers[3].damage = 35f;
     }
 
     public void Shoot()
     {
-        GameObject ballEffect = Instantiate(currentPower, transform.position, Quaternion.identity);
+        BasicPlayerDamage ballEffect = Instantiate(currentPower, transform.position, Quaternion.identity);
         RaycastHit hit;
         if (Physics.Raycast(camera.transform.position, camera.transform.forward, out hit, range))
         {
@@ -45,6 +54,7 @@ public class BallShooter : MonoBehaviour
         }
         PlayShootingSound();
     }
+
 
     private void PlayShootingSound()
     {
@@ -66,7 +76,7 @@ public class BallShooter : MonoBehaviour
         
     }
 
-    private void ShootOnEnemy(GameObject ballEffect, RaycastHit hit)
+    private void ShootOnEnemy(BasicPlayerDamage ballEffect, RaycastHit hit)
     {
         Rigidbody rigidBody = ballEffect.GetComponent<Rigidbody>();
         Vector3 direction = (hit.point - ballEffect.transform.position).normalized;
@@ -96,5 +106,13 @@ public class BallShooter : MonoBehaviour
     public PowerType GetCurrentPowerType()
     {
         return currentPowerType;
+    }
+
+    public void IncreaseDamageOfPowers(int factor)
+    {
+        foreach(BasicPlayerDamage power in powers)
+        {
+            power.damage *= factor;
+        }
     }
 }

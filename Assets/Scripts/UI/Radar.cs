@@ -15,7 +15,6 @@ public class Radar : MonoBehaviour
     [SerializeField]
     Transform playerRadarPoint;
 
-    private Text distanceText;
 
     [SerializeField]
     float radarRadius = 8f;
@@ -25,7 +24,6 @@ public class Radar : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        distanceText = FindObjectOfType<PlayerUI>().GetDistanceText();
         InitializeRadarPoints();
     }
 
@@ -43,7 +41,6 @@ public class Radar : MonoBehaviour
     private void UpdateRadarPoints()
     {
         float distance = Vector3.Distance(destinationObject.transform.position, transform.position);
-        distanceText.text = Math.Round(distance, 0).ToString();
 
         if (distance > radarRadius)
         {

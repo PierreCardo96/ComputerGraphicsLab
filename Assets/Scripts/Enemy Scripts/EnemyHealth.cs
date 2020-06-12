@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 namespace Assets.Scripts
 {
@@ -15,14 +16,39 @@ namespace Assets.Scripts
 
         [SerializeField]
         Slider healthBarSlider;
+
+        [SerializeField]
+        HealthPickup healthBottle;
+
+        [SerializeField]
+        float healthSpawningProbability = 0.2f;
+
         private void Start()
         {
             healthBar = healthBarSlider;
         }
         protected override void ProcessDeath()
         {
+            SpawnHealthBottleWithProbability();
+            MakeDeadBodyTriggered();
             GetComponent<EnemyAnimator>().Die();
             Destroy(gameObject, destructionDelay);
+        }
+
+        private void MakeDeadBodyTriggered()
+        {
+            GetComponent<Rigidbody>().drag = 100;
+            GetComponent<Rigidbody>().angularDrag = 0.05f;
+            //GetComponent<CapsuleCollider>().isTrigger = true;
+            GetComponent<CapsuleCollider>().enabled = false;
+        }
+
+        private void SpawnHealthBottleWithProbability()
+        {
+            if (Random.value < healthSpawningProbability)
+            {
+                Instantiate(healthBottle, transform.position, Quaternion.identity);
+            }
         }
     }
 }

@@ -16,6 +16,4 @@ public class DamageOnCollision : Damage
             DamageOpponent(other.gameObject.GetComponent<Health>());
         }
     }
-
-
 }

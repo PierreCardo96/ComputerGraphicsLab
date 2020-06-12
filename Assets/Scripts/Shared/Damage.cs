@@ -5,7 +5,7 @@ using UnityEngine;
 public class Damage : MonoBehaviour
 {
     [SerializeField]
-    protected float damage = 30f;
+    public float damage = 30f;
 
     [SerializeField]
     protected string opponent;

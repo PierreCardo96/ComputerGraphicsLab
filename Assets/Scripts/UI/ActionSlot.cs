@@ -20,7 +20,12 @@ public class ActionSlot : MonoBehaviour
         powerImage = GetComponent<RawImage>();
         borders = GetComponentsInChildren<RawImage>();
     }
-    
+
+    private void Start()
+    {
+        SetIsActive(false);
+    }
+
     public void Select()
     {
         ColorBorders(Color.red);

@@ -10,6 +10,7 @@ public class LightningBallDamage : BasicPlayerDamage
 
     protected override void OnTriggerEnter(Collider other)
     {
+        print(other.gameObject.name);
         if (other.gameObject.tag != UnAffectedTag)
         {
             FindObjectOfType<AudioManager>().Play("LightningExplosion");

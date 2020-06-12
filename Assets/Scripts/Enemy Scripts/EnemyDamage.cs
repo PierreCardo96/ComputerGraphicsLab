@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.Enemy_Scripts
 {
-    public class EnemyDamage : DamageOnCollision
+    public class EnemyDamage : Damage
     {
         private Health playerHealth;
 

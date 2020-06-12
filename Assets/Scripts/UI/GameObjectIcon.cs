@@ -14,7 +14,7 @@ public class GameObjectIcon : MonoBehaviour
     void Start()
     {
         miniMap = FindObjectOfType<MiniMap>();
-        miniMap.AddMapIconModel(gameObject, image);        
+        miniMap.AddMapIconModel(gameObject, image);
     }
 
     private void OnDestroy()

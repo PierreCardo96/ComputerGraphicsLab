@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Assets.Scripts
 {
@@ -13,10 +14,13 @@ namespace Assets.Scripts
         //{
         //    healthBar = PlayerUI.Instance.GetHealthBarSlider();
         //}
-
+        private Text healthText;
         private void Start()
         {
             healthBar = PlayerUI.Instance.GetHealthBarSlider();
+            healthText = PlayerUI.Instance.GetHealthText();
+            string[] temp = healthText.text.Split(':');
+            currentHealth = float.Parse(temp[1]);
         }
 
         public void IncreaseHealth(int healthAmount)
@@ -24,9 +28,11 @@ namespace Assets.Scripts
             currentHealth += healthAmount;
             if(currentHealth > maxHealth)
             {
-                currentHealth = maxHealth;
+                //currentHealth = maxHealth;
+                maxHealth = currentHealth;
             }
             healthBar.value = currentHealth / maxHealth;
+            healthText.text = $"Health: {currentHealth}";
         }
 
         protected override void ProcessDeath()
@@ -34,6 +40,19 @@ namespace Assets.Scripts
             GetComponentInChildren<PlayerAnimator>().Die();
             GetComponent<DeathHandler>().HandleDeath();
             GetComponent<PlayerInputHandler>().enabled = false;
+        }
+
+        public override void TakeDamage(float damage)
+        {
+            currentHealth -= damage;
+            healthBar.value = currentHealth / maxHealth;
+            healthText.text = $"Health: {currentHealth}";
+            if (healthBar.value <= 0)
+            {
+                healthText.text = $"Health: 0";
+                ProcessDeath();
+            }
+
         }
     }
 }

@@ -7,11 +7,11 @@ public class PlayerUI : MonoBehaviour
 {
     public static PlayerUI Instance = null;
     [SerializeField]
-    Text distanceText;
-    [SerializeField]
     ActionBar actionBar;
     [SerializeField]
     Slider healthBarSlider;
+    [SerializeField]
+    private Text healthText;
 
     private void Awake()
     {
@@ -26,11 +26,6 @@ public class PlayerUI : MonoBehaviour
         }
     }
 
-    public Text GetDistanceText()
-    {
-        return distanceText;
-    }
-
     public ActionBar GetActionBar()
     {
         return actionBar;
@@ -40,14 +35,24 @@ public class PlayerUI : MonoBehaviour
     {
         return healthBarSlider;
     }
+    public Text GetHealthText()
+    {
+        return healthText;
+    }
 
     public void ResetHealth()
     {
         healthBarSlider.value = 1;
+        healthText.text = "Health: 100";
     }
-
+    
     public void UnselectPowers()
     {
         actionBar.UnselectAll();
+    }
+
+    public void SetAllPowersActivation(bool value)
+    {
+        actionBar.SetAllKeysActivation(value);
     }
 }

@@ -28,7 +28,17 @@ public class EnemyPatroling : MonoBehaviour
         {
             float randX = Random.Range(transform.position.x - patrolingRadius, transform.position.x + patrolingRadius);
             float randZ = Random.Range(transform.position.z - patrolingRadius, transform.position.z + patrolingRadius);
-            float yValue = Terrain.activeTerrain.SampleHeight(new Vector3(randX, 0, randZ));
+            float yValue;
+            if (Terrain.activeTerrain != null)
+            {
+                yValue = Terrain.activeTerrain.SampleHeight(new Vector3(randX, 0, randZ));
+            }
+            else
+            {
+                yValue = transform.position.y;
+            }
+            
+
             Vector3 waypoint = new Vector3(randX, yValue, randZ);
             waypoints.Add(waypoint);
             i--;
