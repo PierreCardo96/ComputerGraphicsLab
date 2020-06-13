@@ -48,6 +48,7 @@ public class SceneLoader : MonoBehaviour
 
     public void LoadFirstLevel()
     {
+        Time.timeScale = 1f;
         PlayerUI.Instance?.ResetHealth();
         PlayerUI.Instance?.SetAllPowersActivation(false);
         AudioManager.Instance.Play("Background");
@@ -70,11 +71,12 @@ public class SceneLoader : MonoBehaviour
     private void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
     {
         _audioManager = AudioManager.Instance;
-        _audioManager.StopBetweenScenesMusics();
+        _audioManager.StopMusicsForLoading();
 
         string currentSceneName = scene.name;
         if (currentSceneName == "Menu" || currentSceneName == "Winner")
         {
+            _audioManager.StopAllMusic();
             _audioManager.Play(currentSceneName);
         }
     }

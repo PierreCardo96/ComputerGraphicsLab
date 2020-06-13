@@ -13,7 +13,7 @@ public class EarthquakeSpawner : MonoBehaviour
 
     private void Start()
     {
-        earthquakePrefab.damage = 450;
+        earthquakePrefab.damage = 500;
     }
     public void Spawn()
     {

@@ -10,11 +10,7 @@ namespace Assets.Scripts
 {
     public class PlayerHealth : Health
     {
-        //private void Awake()
-        //{
-        //    healthBar = PlayerUI.Instance.GetHealthBarSlider();
-        //}
-        private Text healthText;
+        private Text healthText; 
         private void Start()
         {
             healthBar = PlayerUI.Instance.GetHealthBarSlider();
@@ -28,7 +24,6 @@ namespace Assets.Scripts
             currentHealth += healthAmount;
             if(currentHealth > maxHealth)
             {
-                //currentHealth = maxHealth;
                 maxHealth = currentHealth;
             }
             healthBar.value = currentHealth / maxHealth;
@@ -52,7 +47,6 @@ namespace Assets.Scripts
                 healthText.text = $"Health: 0";
                 ProcessDeath();
             }
-
         }
     }
 }

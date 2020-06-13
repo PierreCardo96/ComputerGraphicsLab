@@ -23,6 +23,8 @@ namespace Assets.Scripts
         [SerializeField]
         float healthSpawningProbability = 0.2f;
 
+
+
         private void Start()
         {
             healthBar = healthBarSlider;
@@ -30,16 +32,16 @@ namespace Assets.Scripts
         protected override void ProcessDeath()
         {
             SpawnHealthBottleWithProbability();
-            MakeDeadBodyTriggered();
+            DisableDeadBodyCollider();
+
             GetComponent<EnemyAnimator>().Die();
             Destroy(gameObject, destructionDelay);
         }
 
-        private void MakeDeadBodyTriggered()
+        private void DisableDeadBodyCollider()
         {
             GetComponent<Rigidbody>().drag = 100;
             GetComponent<Rigidbody>().angularDrag = 0.05f;
-            //GetComponent<CapsuleCollider>().isTrigger = true;
             GetComponent<CapsuleCollider>().enabled = false;
         }
 

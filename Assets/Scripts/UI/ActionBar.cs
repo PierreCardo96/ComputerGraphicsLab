@@ -31,6 +31,7 @@ public class ActionBar : MonoBehaviour
         }
     }
 
+
     public bool IsPowerActive(PowerType powerType)
     {
         foreach (ActionSlot actionSlot in actionSlots)
@@ -72,6 +73,4 @@ public class ActionBar : MonoBehaviour
             }
         }
     }
-
-
 }

@@ -36,7 +36,8 @@ public class AudioManager : MonoBehaviour
         }
     }
     
-    public void StopBetweenScenesMusics()
+
+    public void StopMusicsForLoading()
     {
         sounds.FindAll(s => s.Name != "Bell" && s.Name != "Background").ForEach(s => s.AudioSource.Stop());
     }

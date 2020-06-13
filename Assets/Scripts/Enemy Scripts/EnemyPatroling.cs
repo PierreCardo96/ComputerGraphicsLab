@@ -37,7 +37,6 @@ public class EnemyPatroling : MonoBehaviour
             {
                 yValue = transform.position.y;
             }
-            
 
             Vector3 waypoint = new Vector3(randX, yValue, randZ);
             waypoints.Add(waypoint);

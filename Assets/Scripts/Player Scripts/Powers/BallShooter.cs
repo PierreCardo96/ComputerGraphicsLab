@@ -38,10 +38,10 @@ public class BallShooter : MonoBehaviour
 
     private void InitializePowerDamage()
     {
-        powers[0].damage = 20f;
-        powers[1].damage = 150f;
-        powers[2].damage = 15f;
-        powers[3].damage = 35f;
+        powers[0].damage = 20;
+        powers[1].damage = 150;
+        powers[2].damage = 15;
+        powers[3].damage = 35;
     }
 
     public void Shoot()
@@ -53,6 +53,15 @@ public class BallShooter : MonoBehaviour
             ShootOnEnemy(ballEffect, hit);
         }
         PlayShootingSound();
+    }
+
+
+    public void IncreaseDamageOfPowers(int factor)
+    {
+        foreach(BasicPlayerDamage power in powers)
+        {
+            power.damage *= factor;
+        }
     }
 
 
@@ -106,13 +115,5 @@ public class BallShooter : MonoBehaviour
     public PowerType GetCurrentPowerType()
     {
         return currentPowerType;
-    }
-
-    public void IncreaseDamageOfPowers(int factor)
-    {
-        foreach(BasicPlayerDamage power in powers)
-        {
-            power.damage *= factor;
-        }
     }
 }
